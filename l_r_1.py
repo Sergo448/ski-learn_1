@@ -1,9 +1,9 @@
-# Модуль Ski-Perceptron
-# Персептрон на безе библиотеки scikit-learn
+# Модуль SciPer
 
 import matplotlib.pyplot as plt
 import pylab as p
 from sklearn.model_selection import train_test_split as tts
+from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from matplotlib.colors import ListedColormap
 from sklearn.linear_model import Perceptron
@@ -70,3 +70,24 @@ plt.xlabel('Длина лепестка (стандартизированная)
 plt.ylabel('Ширина лепестка (стандартизированная')
 plt.legend(loc='upper left')
 plt.show()
+
+Lr = LogisticRegression(C=1000.0, random_state=0)
+Lr.fit(X_train_std, y_train)
+
+plot_decision_regions(X_combined_std, y_combined, classifier=Lr,
+                      test_idx=range(105, 150))
+plt.xlabel('Длина лепестка (стандартизированная)')
+plt.ylabel('Ширина лепестка (стандартизированная')
+plt.legend(loc='upper left')
+plt.show()
+
+X1 = np.array([[1.5, 1.5]])
+X2 = np.array([[0.0, 0.0]])
+X3 = np.array([[-1, -1]])
+p1 = Lr.predict_proba(X1)
+p2 = Lr.predict_proba(X2)
+p3 = Lr.predict_proba(X3)
+
+print(X1, p1)
+print(X2, p2)
+print(X3, p3)
